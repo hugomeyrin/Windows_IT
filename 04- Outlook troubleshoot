@@ -1,0 +1,55 @@
+
+Troubleshooting Outlook issues
+Outlook for Microsoft 365 Outlook 2021 Outlook 2019 Outlook 2016 More...
+
+Are you having problems with Outlook? Answer a few quick questions so we can help you get back to sending and receiving email.
+
+If you can't open Outlook, or Outlook disappears or crashes, one of your add-ins may be to blame or you may need to update Outlook.
+
+You might need to set Windows Update to automatically download and install recommended updates. Installing any important, recommended, and optional updates can often correct problems by replacing out-of-date files and fixing vulnerabilities. To install the latest Windows and Office updates, click the link below.
+
+Keep Windows up to date with the latest Updates
+
+Did that work? Great. If not, you can contact support.
+
+You can start Outlook in safe mode, disable your add-ins, and then try to open Outlook normally.
+
+    In Windows 10, click Start.
+
+    Type Outlook /safe, in the Search programs and files and then click OK.
+
+    Close and re-open Outlook.
+
+    If the issue is resolved, you can keep working, or if you have time, take the following steps to find out what COM Add-in is causing the problem.
+
+        Open the File menu, click Options, then click Add-ins.
+
+        Select COM Add-ins and click Go.
+
+        Clear all the check boxes in the list to disable the Add-ins and click OK.
+
+        Restart Outlook.
+
+        If the issue does not occur, go back to the COM Add-ins screen and enable them one at a time until the error occurs. (Be sure to close and restart Outlook after each Add-in is enabled.)
+
+Did that work? Great. If not, you can contact support.
+
+If you can't choose any of the menu options, type inside an email message, calendar event, or contact, Outlook may have frozen. There are three steps you can take to try to get Outlook working again.
+
+Occasionally, Outlook tries to run a process in the background. Auto-archive, sending and receiving a very large attachment, or running some of the other mailbox tools can all be done in the background. Check the status bar at the bottom of the screen to see if another process is running. If so, wait a short time (usually two or three minutes) to see if Outlook starts working again.
+
+Did that work? Great. If not, you can contact support.
+
+If you can't open a particular set of folders, you can try to repair your personal folders file or create a new profile.
+
+Try following the steps outlined here to create a new profile:
+
+Create an Outlook profile
+
+Did that work? Great. If not, you can contact support.
+
+Try following the steps outlined here to repair your .pst file:
+
+Repair Outlook Data Files (.pst and .ost)
+
+Did that work? Great. If not, you can contact support.
