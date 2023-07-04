@@ -1,0 +1,10 @@
+
+ 1. Go to link [Skip this drive] and then get a command prompt.when bitlocker drive key appears 
+
+go to cmd
+manage-bde -status c:
+3. If the status is “locked”, use this command and end with the recovery key to unlock:
+manage-bde -unlock c: -rp <your 48-digit recovery password>
+4. After that, use this command to suspend protection:
+manage-bde -protectors -disable c:
+5. Finally, exit the program and reboot the computer.
