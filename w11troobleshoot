@@ -12,7 +12,7 @@ https://www.microsoft.com/en-us/soft...load/windows10
 If Windows 10 or Windows 11 has missing or corrupted system files, in this video, i will guide you how to repair the corrupted system files using the DISM and SFC command tools from Windows Recovery Environment.
 
 Repair Master Boot Record MBR
-
+https://www.thewindowsclub.com/repair-master-boot-record-mbr-windows
 The process is almost the same for Windows 11/10/8/7. First and foremost, you need a Windows installation DVD. Without that, it will be hard to proceed.
 
 1] Press F8 while booting the system to the Windows Recovery Menu.
