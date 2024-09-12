@@ -69,7 +69,14 @@ The BCDboot tool is a command-line tool that enables you to manage system partit
 
 Do note that you have to boot your computer into Advanced Recovery Mode and then execute this command, else you may see a Failure when attempting to copy boot files error message.
 
+When you run this command, it will give you a new Bootloader. Here “c” is the System drive.  You should only do this when you know the exact drive on which Windows was installed.
 
+Lastly, we recommend you take a look at this post to how to repair & rebuild MBR or Master Boot Record. If you are not comfortable with the commands, then you can use third-party tools such as EasyBCD or Dual-Boot Repair to repair your BCD file.
+
+Read: How to repair the EFI bootloader in Windows.
+Does rebuilding BCD delete files?
+
+No, rebuilding BCD does not delete files. Bootrec.exe, fixmbr bootrec.exe, fixboot and bootrec.exe help us to repair the boot files, which will not affect any of the personal files and folder.
 
 
 
