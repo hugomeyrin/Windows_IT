@@ -1,0 +1,249 @@
+https://www.youtube.com/watch?v=HabGEnV-b5U
+How to Repair Windows 10 Image using DISM
+
+
+If a Windows image becomes unserviceable, you can use the Deployment Imaging and Servicing Management (DISM) tool to update the files and correct the problem.
+
+For example, you would use DISM to fix Windows component store corruption when a sfc /scannow command is unable to repair corrupted or modified system files because the component store (source) is corrupted. SFC should be able to repair the files afterwards.
+
+For more information, see:
+
+    DISM - Deployment Image Servicing and Management | Microsoft Docs
+    Fixing component store corruption in Windows 8 and Windows Server 2012 - The Windows Servicing Guy - Site Home - Microsoft Docs
+    How to Repair a Windows Image | Microsoft Hardware Dev Center
+    Fix Windows Update errors by using the DISM or System Update Readiness tool
+    Repair-WindowsImage | PowerShell | Microsoft Docs
+
+
+The DISM /Cleanup-Image tool saves it's log files in the file locations below. To be able to view these logs, you would need to copy them from the locations below to your desktop, then open them from your desktop.
+
+C:\Windows\Logs\CBS\CBS.log
+
+C:\Windows\Logs\DISM\dism.log
+
+This tutorial will show you how to do an Inbox Corruption Repair with the DISM /Cleanup-Image tool to fix component store corruption in Windows 10.
+
+You must be signed in as an administrator to be able to do an Inbox Corruption Repair with the Deployment Imaging and Servicing Management (DISM) tool.
+
+For a Windows 11 version of this tutorial, see:
+
+Repair Windows Image Component Store in Windows 11
+
+
+Contents
+
+    Option One: To Run "DISM /Cleanup-Image" Tool in Command Prompt
+    Option Two: To Run "DISM /Cleanup-Image" Tool in PowerShell
+
+
+
+
+
+
+
+OPTION ONE
+To Run "DISM /Cleanup-Image" Tool in Command Prompt
+
+1 Open an elevated command prompt.
+
+2 Do step3, step 4, step 5 (recommended), step 6, or step 7 below for what DISM command you would like to use.
+
+
+ 3. To Use DISM /CheckHealth Command
+
+You would use /CheckHealth to only check whether the image has been flagged as corrupted by a failed process and whether the corruption can be repaired. This is just a quick way to see if corruption currently exists, and to inform you if there is corruption. This does not fix anything or create a log. This will finish running almost instantly.
+
+A) Copy and paste the Dism /Online /Cleanup-Image /CheckHealth command into the elevated command prompt, press Enter, and go to step 8 below. (see screenshot below)
+
+Use DISM to Repair Windows 10 Image-dism_checkhealth.png
+
+
+ 4. To Use DISM /ScanHealth Command
+
+You would use /ScanHealth to scan the image for component store corruption. This option does not fix any corruption. It only checks for component store corruption and records that corruption to the log file. This can take around 5-10 minutes to finish. It will stay at 20% for a while before continuing.
+
+A) Copy and paste the Dism /Online /Cleanup-Image /ScanHealth command into the elevated command prompt, press Enter, and go to step 8 below. (see screenshot below)
+
+Use DISM to Repair Windows 10 Image-dism_scanhealth.png
+
+
+ 5. To Use DISM /RestoreHealth Command
+
+(recommended) You would use /RestoreHealth to scan the image for component store corruption, perform repair operations automatically using Windows Update as the source, and records that corruption to the log file. This can take around 10-15 minutes up to a few hours to finish depending on the level of corruption. It will stay at 20% for a while before continuing.
+
+You will need to have an Internet connection for this command to perform repair operations automatically using Windows Update as the source.
+
+If this command fails, then you can do step 6 or step 7 below instead.
+
+A) Copy and paste the Dism /Online /Cleanup-Image /RestoreHealth command into the elevated command prompt, press Enter, and go to step 8 below. (see screenshot below)
+
+Use DISM to Repair Windows 10 Image-dism_restorehealth.png
+
+
+ 6. To Use DISM /RestoreHealth /Source:wim Command
+
+You would use /Source with /RestoreHealth to specify the location of an install.wim file as the source of known good versions of files that can be used for the repair. This can take around 10-15 minutes up to a few hours to finish depending on the level of corruption. It will stay at 20% for a while before continuing.
+
+This can be useful if step 5 above was not able to repair the Windows image (component store).
+
+The install.wim file will be in the Sources folder of a mounted Windows 10 ISO file.
+
+If you have an install.esd file instead of install.wim, then you would need to use step 7 below instead.
+
+If you get a 0xc1420127 or 50 error, see here.
+
+A) Use steps 1-4 in the tutorial below to verify if this Windows 10 ISO file has install.wim and what the index number is for your edition of Windows 10.
+
+How to See Full Details about a Windows 10 ISO file
+
+B) Type the command below you want to use into the elevated command prompt, press Enter, and go to step 8 below. (see screenshot below)
+
+Dism /Online /Cleanup-Image /RestoreHealth /Source:wim:Full Path to install.wim file:<Index Number>
+
+OR
+
+(To prevent DISM from using Windows Update for online images)
+Dism /Online /Cleanup-Image /RestoreHealth /Source:wim:Full Path to install.wim file:<Index Number> /limitaccess
+
+Substitute <Index Number> in the command above with the actual index number (ex: "1") for the edition (ex: "Pro") you want details about from step 6A above.
+
+For example: Dism /Online /Cleanup-Image /RestoreHealth /Source:wim:D:\sources\install.wim:1 /limitaccess
+
+Use DISM to Repair Windows 10 Image-dism_restorehealth_wim_sources.png
+
+
+ 7. To Use DISM /RestoreHealth /Source:esd Command
+
+You would use /Source with /RestoreHealth to specify the location of an install.esd file as the source of known good versions of files that can be used for the repair. This can take around 10-15 minutes up to a few hours to finish depending on the level of corruption. It will stay at 20% for a while before continuing.
+
+This can be useful if step 5 above was not able to repair the Windows image (component store).
+
+The install.esd file will be in the Sources folder of a mounted Windows 10 ISO from Media Creation Tool (use ISO from OPTION ONE at link) file.
+
+If you have an install.wim file instead of install.esd, then you would need to use step 6 above instead.
+
+A) Use steps 1-4 in the tutorial below to verify if this Windows 10 ISO file has install.esd and what the index number is for your edition of Windows 10.
+
+How to See Full Details about a Windows 10 ISO file
+
+B) Type the command below you want to use into the elevated command prompt, press Enter, and go to step 8 below. (see screenshot below)
+
+Dism /Online /Cleanup-Image /RestoreHealth /Source:esd:Full Path to install.esd file:<Index Number>
+
+OR
+
+(To prevent DISM from using Windows Update for online images)
+Dism /Online /Cleanup-Image /RestoreHealth /Source:esd:Full Path to install.esd file:<Index Number> /limitaccess
+
+Substitute <Index Number> in the command above with the actual index number (ex: "1") for the edition (ex: "Pro") you want details about from step 7A above.
+
+For example:
+
+Dism /Online /Cleanup-Image /RestoreHealth /Source:esd:C:\$Windows.~BT\Sources\Install.esd:1 /limitaccess
+
+OR
+
+(USB from Media Creation Tool where E is drive letter of USB)
+Dism /Online /Cleanup-Image /RestoreHealth /Source:esd:E:\Sources\Install.esd:1 /limitaccess
+
+Use DISM to Repair Windows 10 Image-dism_restorehealth_esd_sources.png
+
+8 If you did step 5, step 6, or step 7 above, it is recommended to restart the computer to fully apply.
+
+
+
+
+
+
+OPTION TWO
+To Run "DISM /Cleanup-Image" Tool in PowerShell
+
+1 Open an elevated PowerShell.
+
+2 Do step3, step 4, step 5 (recommended), step 6, or step 7 below for what DISM command you would like to use.
+
+
+ 3. To Use DISM /CheckHealth Command
+
+You would use /CheckHealth to only check whether the image has been flagged as corrupted by a failed process and whether the corruption can be repaired. This is just a quick way to see if corruption currently exists, and to inform you if there is corruption. This does not fix anything or create a log. This will finish running almost instantly.
+
+A) Copy and paste the Repair-WindowsImage -Online -CheckHealth command into the elevated PowerShell, press Enter, and go to step 8 below. (see screenshot below)
+
+Use DISM to Repair Windows 10 Image-powershell_repair-windowsimage_checkhealth.png
+
+
+ 4. To Use DISM /ScanHealth Command
+
+You would use /ScanHealth to scan the image for component store corruption. This option does not fix any corruption. It only checks for component store corruption and records that corruption to the log file. This can take around 5-10 minutes to finish. It will stay at 20% for a while before continuing.
+
+A) Copy and paste the Repair-WindowsImage -Online -ScanHealth command into the elevated PowerShell, press Enter, and go to step 8 below. (see screenshot below)
+
+Use DISM to Repair Windows 10 Image-powershell_repair-windowsimage_scanhealth.png
+
+
+ 5. To Use DISM /RestoreHealth Command
+
+(recommended) You would use /RestoreHealth to scan the image for component store corruption, perform repair operations automatically using Windows Update as the source, and records that corruption to the log file. This can take around 10-15 minutes up to a few hours to finish depending on the level of corruption. It will stay at 20% for a while before continuing.
+
+You will need to have an Internet connection for this command to perform repair operations automatically using Windows Update as the source..
+
+If this command fails, then you can do step 6 or step 7 below instead.
+
+A) Copy and paste the Repair-WindowsImage -Online -RestoreHealth command into the elevated PowerShell, press Enter, and go to step 8 below. (see screenshot below)
+
+Use DISM to Repair Windows 10 Image-powershell_repair-windowsimage_restorehealth.png
+
+
+ 6. To Use DISM /RestoreHealth /Source:wim Command
+
+You would use /Source with /RestoreHealth to specify the location of an install.wim file as the source of known good versions of files that can be used for the repair. This can take around 10-15 minutes up to a few hours to finish depending on the level of corruption. It will stay at 20% for a while before continuing.
+
+This can be useful if step 5 above was not able to repair the Windows image (component store).
+
+The install.wim file will be in the Sources folder of a mounted Windows 10 ISO file.
+
+If you have an install.esd file instead of install.wim, then you would need to use step 7 below instead.
+
+If you get a 0xc1420127 or 50 error, see here.
+
+A) Use steps 1-4 in the tutorial below to verify if this Windows 10 ISO file has install.esd and what the index number is for your edition of Windows 10.
+
+How to See Full Details about a Windows 10 ISO file
+
+B) Type the command below you want to use into the elevated PowerShell, press Enter, and go to step 8 below. (see screenshot below)
+
+Repair-WindowsImage -Online -RestoreHealth -Source "Full Path to install.wim file:<Index Number>"
+
+OR
+
+(To prevent DISM from using Windows Update for online images)
+Repair-WindowsImage -Online -RestoreHealth -Source "Full Path to install.wim file:<Index Number>" -LimitAccess
+
+Substitute <Index Number> in the command above with the actual index number (ex: "1") for the edition (ex: "Pro") you want details about from step 6A above.
+
+For example: Repair-WindowsImage -Online -RestoreHealth -Source "D:\sources\install.wim:1" -LimitAccess
+
+ 7. To Use DISM /RestoreHealth /Source:esd Command
+
+You would use /Source with /RestoreHealth to specify the location of an install.esd file as the source of known good versions of files that can be used for the repair. This can take around 10-15 minutes up to a few hours to finish depending on the level of corruption. It will stay at 20% for a while before continuing.
+
+This can be useful if step 5 above was not able to repair the Windows image (component store).
+
+The install.esd file can be in the Sources folder of a mounted Windows 10 ISO from Media Creation Tool (Use ISO from OPTION ONE at link) file.
+
+If you have an install.wim file instead of install.esd, then you would need to use step 6 above instead.
+
+A) Type the command below you want to use into the elevated PowerShell, press Enter, and go to step 8 below. (see screenshot below)
+
+Repair-WindowsImage -Online -RestoreHealth -Source "Full Path to install.esd file:<Index Number>"
+
+OR
+
+(To prevent DISM from using Windows Update for online images)
+Repair-WindowsImage -Online -RestoreHealth -Source "Full Path to install.esd file:<Index Number>" -LimitAccess
+
+Substitute <Index Number> in the command above with the actual index number (ex: "1") for the edition (ex: "Pro") you want details about from step 7A above.
+
+For example: Repair-WindowsImage -Online -RestoreHealth -Source "C:\$Windows.~BT\Sources\Install.esd:1" -LimitAccess
+
+8 If you did step 5, step 6, or step 7 above, it is recommended to restart the computer to fully apply.
