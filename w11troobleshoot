@@ -50,7 +50,24 @@ image
     Once you insert the USB drive, it will start creating the Recovery for your USB drive.
 
 
+boot issues 3
 
+BCD or Boot Configuration Data is a firmware-independent database file which has boot-time configuration data. It is required by Windows Boot Manager and replaces the boot.ini that was used by NTLDR earlier. In the case of boot problems, you may be required to rebuild BCD.
+
+    Boot your computer into Advanced Recovery Mode
+    Launch Command Prompt available under Advanced Options.
+    To rebuild the BCD or Boot Configuration Data file use the command – bootrec /rebuildbcd
+    It will scan for other operating systems and let you select the OS’s you want to add to BCD.
+
+If this does not help, you can manually set the boot path. However, do so only if you are an expert, as it could create issues.
+
+In the Command Prompt, type the following command and hit Enter:
+
+bcdboot c:\windows /s c:
+
+The BCDboot tool is a command-line tool that enables you to manage system partition files. If the system partition has been corrupted, you can use BCDboot to replace the system partition files with new copies of these files from the Windows partition.
+
+Do note that you have to boot your computer into Advanced Recovery Mode and then execute this command, else you may see a Failure when attempting to copy boot files error message.
 
 
 
