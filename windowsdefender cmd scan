@@ -1,0 +1,7 @@
+How to perform quick virus scan with Microsoft Defender
+To perform a quick Microsoft Defender scan, use these steps:
+
+Open Start.
+Search for Command Prompt, right-click the top result, and select the Run as administrator option.
+Type the following command to open the antivirus tool location and press Enter:cd C:\ProgramData\Microsoft\Windows Defender\Platform\4.18*
+Type the following command to perform a quick antivirus scan and press Enter:MpCmdRun -Scan -ScanType 1Quick tip: You can also replace 1 with the 0 option in the command to start a default scan according to your configuration.
