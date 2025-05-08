@@ -13,4 +13,4 @@ Dism.exe /online /Cleanup-image /ScanHealth
 Dism.exe /online /Cleanup-image /RestoreHealth
 @echo "All of your cache was cleaned test made by Vitor"
 @echo "let's test this next tool this will allow to check windows drivers signatures"
-SIGCHECK
+sigcheck64 -vt 
