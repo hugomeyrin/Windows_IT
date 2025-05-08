@@ -16,3 +16,4 @@ Dism.exe /online /Cleanup-image /RestoreHealth
 sigcheck64 -vt 
 @echo "lets see all signatures from your system"
 sigcheck -u -e c:\windows\system32\
+#sigcheck.exe -vt -vr notepad.exe 
