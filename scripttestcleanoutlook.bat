@@ -12,3 +12,5 @@ Dism.exe /online /Cleanup-image /ScanHealth
 @echo "Correcting windows image"
 Dism.exe /online /Cleanup-image /RestoreHealth
 @echo "All of your cache was cleaned test made by Vitor"
+@echo "let's test this next tool this will allow to check windows drivers signatures"
+SIGCHECK
